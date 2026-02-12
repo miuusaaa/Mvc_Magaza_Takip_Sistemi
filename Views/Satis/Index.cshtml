@@ -1,0 +1,32 @@
+﻿@using Mağaza_Ürün_Takip_Sistemi.Models.Entity;
+@model List<SATISLAR>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<table class="table table-bordered">
+    <tr>
+        <th>ID</th>
+        <th>ÜRÜN ADI</th>
+        <th>PERSONEL ADI</th>
+        <th>MÜŞTERİ ADI</th>
+        <th>SATIŞ FİYATI</th>
+        <th>SATIŞ TARİHİ</th>
+    </tr>
+    @foreach (var items in Model)
+    {
+        <tr>
+            <td>@items.id</td>
+            <td>@items.URUNLER.ad</td>
+            <td>@items.PERSONELLER.ad @items.PERSONELLER.soyad</td>
+            <td>@items.MUSTERILER.ad @items.MUSTERILER.soyad</td>
+            <td>@items.fiyat</td>
+            <td>@items.tarih</td>
+        </tr>
+    }
+</table>
+
+<a href="/Satis/YeniSatis" class="btn btn-primary">YENİ SATIŞ EKLE</a>

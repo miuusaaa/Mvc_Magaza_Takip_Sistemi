@@ -1,0 +1,27 @@
+﻿@using Mağaza_Ürün_Takip_Sistemi.Models.Entity;
+@model List<KATEGORILER> 
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<table class="table table-bordered">
+    <tr>
+     <th>ID</th>
+     <th>KATEGORİ ADI</th>
+     <th>SİL</th>
+     <th>GÜNCELLE</th>
+    </tr>
+    @foreach(var items in Model)
+            {
+                <tr>
+                    <td>@items.id</td>
+                    <td>@items.ad</td>
+                    <td><a href="/Kategori/KategoriSil/@items.id" class="btn btn-danger">Sil</a></td>
+                    <td><a href="/Kategori/KategoriGetir/@items.id" class="btn btn-success">Güncelle</a></td>
+                </tr>
+            }
+</table>
+
+<a href="/Kategori/YeniKategori" class="btn btn-primary">YENİ KATEGORİ EKLE</a>

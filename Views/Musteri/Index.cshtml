@@ -1,0 +1,48 @@
+﻿@using Mağaza_Ürün_Takip_Sistemi.Models.Entity;
+@using PagedList;
+@using PagedList.Mvc
+@model PagedList.IPagedList<MUSTERILER>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<table class="table table-bordered">
+    <tr>
+        <th>ID</th>
+        <th>AD</th>
+        <th>SOYAD</th>
+        <th>ŞEHİR</th>
+        <th>BAKİYE</th>
+        <th>SİL</th>
+        <th>GÜNCELLE</th>
+
+    </tr>
+    @foreach (var items in Model)
+    {
+        <tr>
+            <td>@items.id</td>
+            <td>@items.ad</td>
+            <td>@items.soyad</td>
+            <td>@items.sehir</td>
+            <td>@items.bakiye</td>
+            <td>
+                @*Müşteri silmeyi post ile yaptık , httpget güvenli değilmiş*@
+                @using (Html.BeginForm("MusteriSil", "Musteri", FormMethod.Post))
+                {
+                    @Html.Hidden("id", items.id)
+                    <button type="submit" class="btn btn-danger"
+                            onclick="return confirm('Bu müşteriyi silmek istiyor musunuz?');">
+                        Sil
+                    </button>
+                }
+            </td>
+            <td><a href="/Musteri/MusteriGetir/@items.id" class="btn btn-success">Güncelle</a></td>
+        </tr>
+    }
+</table>
+
+@Html.PagedListPager((IPagedList)Model,sayfa => Url.Action("Index",new {sayfa}))
+
+<a href="/Musteri/YeniMusteriEklemeSayfasi" class="btn btn-primary">YENİ MÜŞTERİ EKLE</a>

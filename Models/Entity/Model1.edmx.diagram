@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e3f050a804cc4784b4ca17b79ab63f78" Name="Diagram1">
+        <EntityTypeShape EntityType="MagazaUrunStokMVCModel.KATEGORILER" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MagazaUrunStokMVCModel.MUSTERILER" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MagazaUrunStokMVCModel.PERSONELLER" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MagazaUrunStokMVCModel.SATISLAR" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="MagazaUrunStokMVCModel.URUNLER" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="MagazaUrunStokMVCModel.FK_URUNLER_KATEGORILER" ManuallyRouted="false" />
+        <AssociationConnector Association="MagazaUrunStokMVCModel.FK_SATISLAR_MUSTERILER" ManuallyRouted="false" />
+        <AssociationConnector Association="MagazaUrunStokMVCModel.FK_SATISLAR_PERSONELLER" ManuallyRouted="false" />
+        <AssociationConnector Association="MagazaUrunStokMVCModel.FK_SATISLAR_URUNLER" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

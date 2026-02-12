@@ -1,0 +1,27 @@
+﻿@model Mağaza_Ürün_Takip_Sistemi.Models.Entity.MUSTERILER
+@{
+    ViewBag.Title = "MusteriGetir";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("MusteriGuncelle", "Musteri", FormMethod.Post))
+{
+    @Html.HiddenFor(X => X.id, new { @class = "form-control" })
+
+    @Html.TextBoxFor(X => X.ad, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.ad, "", new { @style = "color : green" })
+    <br />
+    <br />
+    @Html.TextBoxFor(X => X.soyad, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.soyad, "", new { @style = "color : green" })
+    <br />
+    <br />
+    @Html.TextBoxFor(X => X.sehir, new { @class = "form-control" })
+    <br />
+
+    @Html.TextBoxFor(x => x.bakiye, new{@class = "form-control",})
+    @Html.ValidationMessageFor(x => x.bakiye, "", new { @style = "color : green" })
+    <br />
+    <button class="btn btn-warning">GÜNCELLE</button>
+}
+

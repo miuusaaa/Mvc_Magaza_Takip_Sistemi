@@ -1,0 +1,38 @@
+﻿@model Mağaza_Ürün_Takip_Sistemi.Models.Entity.URUNLER
+@{
+    ViewBag.Title = "YeniUrun";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<h2>YENİ ÜRÜN EKLEME SAYFASINDASINIZ....</h2>
+<br />
+<br />
+
+<form method="post">
+    <label>Yeni Ürün Adı</label>
+    @Html.TextBoxFor(x => x.ad, new { @class = "form-control" })
+    <br />
+    <br />
+    <label>Yeni Ürün Markası</label>
+    @Html.TextBoxFor(x => x.marka, new { @class = "form-control" })
+    <br />
+    <br />
+    <label>Yeni Ürün Stoğu</label>
+    @Html.TextBoxFor(x => x.stok, new { @class = "form-control" })
+    <br />
+    <br />
+    <label>Yeni Ürün Alış Fiyatı</label>
+    @Html.TextBoxFor(x => x.alisfiyat, new { @class = "form-control" })
+    <br />
+    <br />
+    <label>Yeni Ürün Satış Fiyatı</label>
+    @Html.TextBoxFor(x => x.satisfiyat, new { @class = "form-control" })
+    <br />
+    <br />
+    <label>Yeni Ürün Kategorisi</label>
+    @Html.DropDownListFor(x => x.KATEGORILER.id, (List<SelectListItem>)ViewBag.ktg , new { @class = "form-control" })
+    <br />
+    <br />
+    <button class="btn btn-danger">EKLE</button>
+</form>

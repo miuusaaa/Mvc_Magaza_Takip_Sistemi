@@ -1,0 +1,355 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MagazaUrunStokMVCModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="KATEGORILER">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ad" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="durum" Type="bit" />
+        </EntityType>
+        <EntityType Name="MUSTERILER">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ad" Type="varchar" MaxLength="30" />
+          <Property Name="soyad" Type="varchar" MaxLength="30" />
+          <Property Name="sehir" Type="varchar" MaxLength="15" />
+          <Property Name="bakiye" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="durum" Type="bit" />
+        </EntityType>
+        <EntityType Name="PERSONELLER">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ad" Type="varchar" MaxLength="50" />
+          <Property Name="soyad" Type="varchar" MaxLength="50" />
+          <Property Name="departman" Type="varchar" MaxLength="30" />
+          <Property Name="durum" Type="bit" />
+        </EntityType>
+        <EntityType Name="SATISLAR">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="urun" Type="int" />
+          <Property Name="personel" Type="int" />
+          <Property Name="musteri" Type="int" />
+          <Property Name="fiyat" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="tarih" Type="smalldatetime" />
+        </EntityType>
+        <EntityType Name="URUNLER">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ad" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="marka" Type="varchar" MaxLength="50" />
+          <Property Name="stok" Type="int" />
+          <Property Name="alisfiyat" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="satisfiyat" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="kategori" Type="int" />
+          <Property Name="durum" Type="bit" />
+        </EntityType>
+        <Association Name="FK_SATISLAR_MUSTERILER">
+          <End Role="MUSTERILER" Type="Self.MUSTERILER" Multiplicity="0..1" />
+          <End Role="SATISLAR" Type="Self.SATISLAR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MUSTERILER">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SATISLAR">
+              <PropertyRef Name="musteri" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SATISLAR_PERSONELLER">
+          <End Role="PERSONELLER" Type="Self.PERSONELLER" Multiplicity="0..1" />
+          <End Role="SATISLAR" Type="Self.SATISLAR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERSONELLER">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SATISLAR">
+              <PropertyRef Name="personel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SATISLAR_URUNLER">
+          <End Role="URUNLER" Type="Self.URUNLER" Multiplicity="0..1" />
+          <End Role="SATISLAR" Type="Self.SATISLAR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="URUNLER">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SATISLAR">
+              <PropertyRef Name="urun" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_URUNLER_KATEGORILER">
+          <End Role="KATEGORILER" Type="Self.KATEGORILER" Multiplicity="0..1" />
+          <End Role="URUNLER" Type="Self.URUNLER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KATEGORILER">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="URUNLER">
+              <PropertyRef Name="kategori" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MagazaUrunStokMVCModelStoreContainer">
+          <EntitySet Name="KATEGORILER" EntityType="Self.KATEGORILER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MUSTERILER" EntityType="Self.MUSTERILER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PERSONELLER" EntityType="Self.PERSONELLER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SATISLAR" EntityType="Self.SATISLAR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="URUNLER" EntityType="Self.URUNLER" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_SATISLAR_MUSTERILER" Association="Self.FK_SATISLAR_MUSTERILER">
+            <End Role="MUSTERILER" EntitySet="MUSTERILER" />
+            <End Role="SATISLAR" EntitySet="SATISLAR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SATISLAR_PERSONELLER" Association="Self.FK_SATISLAR_PERSONELLER">
+            <End Role="PERSONELLER" EntitySet="PERSONELLER" />
+            <End Role="SATISLAR" EntitySet="SATISLAR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SATISLAR_URUNLER" Association="Self.FK_SATISLAR_URUNLER">
+            <End Role="URUNLER" EntitySet="URUNLER" />
+            <End Role="SATISLAR" EntitySet="SATISLAR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_URUNLER_KATEGORILER" Association="Self.FK_URUNLER_KATEGORILER">
+            <End Role="KATEGORILER" EntitySet="KATEGORILER" />
+            <End Role="URUNLER" EntitySet="URUNLER" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MagazaUrunStokMVCModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="KATEGORILER">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="URUNLER" Relationship="Self.FK_URUNLER_KATEGORILER" FromRole="KATEGORILER" ToRole="URUNLER" />
+          <Property Name="durum" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="MUSTERILER">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ad" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="soyad" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="sehir" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="bakiye" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="SATISLAR" Relationship="Self.FK_SATISLAR_MUSTERILER" FromRole="MUSTERILER" ToRole="SATISLAR" />
+          <Property Name="durum" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="PERSONELLER">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="soyad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="departman" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="SATISLAR" Relationship="Self.FK_SATISLAR_PERSONELLER" FromRole="PERSONELLER" ToRole="SATISLAR" />
+          <Property Name="durum" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="SATISLAR">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="urun" Type="Int32" />
+          <Property Name="personel" Type="Int32" />
+          <Property Name="musteri" Type="Int32" />
+          <Property Name="fiyat" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="tarih" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="MUSTERILER" Relationship="Self.FK_SATISLAR_MUSTERILER" FromRole="SATISLAR" ToRole="MUSTERILER" />
+          <NavigationProperty Name="PERSONELLER" Relationship="Self.FK_SATISLAR_PERSONELLER" FromRole="SATISLAR" ToRole="PERSONELLER" />
+          <NavigationProperty Name="URUNLER" Relationship="Self.FK_SATISLAR_URUNLER" FromRole="SATISLAR" ToRole="URUNLER" />
+        </EntityType>
+        <EntityType Name="URUNLER">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="marka" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="stok" Type="Int32" />
+          <Property Name="alisfiyat" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="satisfiyat" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="kategori" Type="Int32" />
+          <NavigationProperty Name="KATEGORILER" Relationship="Self.FK_URUNLER_KATEGORILER" FromRole="URUNLER" ToRole="KATEGORILER" />
+          <NavigationProperty Name="SATISLAR" Relationship="Self.FK_SATISLAR_URUNLER" FromRole="URUNLER" ToRole="SATISLAR" />
+          <Property Name="durum" Type="Boolean" />
+        </EntityType>
+        <Association Name="FK_URUNLER_KATEGORILER">
+          <End Role="KATEGORILER" Type="Self.KATEGORILER" Multiplicity="0..1" />
+          <End Role="URUNLER" Type="Self.URUNLER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KATEGORILER">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="URUNLER">
+              <PropertyRef Name="kategori" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SATISLAR_MUSTERILER">
+          <End Role="MUSTERILER" Type="Self.MUSTERILER" Multiplicity="0..1" />
+          <End Role="SATISLAR" Type="Self.SATISLAR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MUSTERILER">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SATISLAR">
+              <PropertyRef Name="musteri" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SATISLAR_PERSONELLER">
+          <End Role="PERSONELLER" Type="Self.PERSONELLER" Multiplicity="0..1" />
+          <End Role="SATISLAR" Type="Self.SATISLAR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERSONELLER">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SATISLAR">
+              <PropertyRef Name="personel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SATISLAR_URUNLER">
+          <End Role="URUNLER" Type="Self.URUNLER" Multiplicity="0..1" />
+          <End Role="SATISLAR" Type="Self.SATISLAR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="URUNLER">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SATISLAR">
+              <PropertyRef Name="urun" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MagazaUrunStokMVCEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="KATEGORILER" EntityType="Self.KATEGORILER" />
+          <EntitySet Name="MUSTERILER" EntityType="Self.MUSTERILER" />
+          <EntitySet Name="PERSONELLER" EntityType="Self.PERSONELLER" />
+          <EntitySet Name="SATISLAR" EntityType="Self.SATISLAR" />
+          <EntitySet Name="URUNLER" EntityType="Self.URUNLER" />
+          <AssociationSet Name="FK_URUNLER_KATEGORILER" Association="Self.FK_URUNLER_KATEGORILER">
+            <End Role="KATEGORILER" EntitySet="KATEGORILER" />
+            <End Role="URUNLER" EntitySet="URUNLER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SATISLAR_MUSTERILER" Association="Self.FK_SATISLAR_MUSTERILER">
+            <End Role="MUSTERILER" EntitySet="MUSTERILER" />
+            <End Role="SATISLAR" EntitySet="SATISLAR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SATISLAR_PERSONELLER" Association="Self.FK_SATISLAR_PERSONELLER">
+            <End Role="PERSONELLER" EntitySet="PERSONELLER" />
+            <End Role="SATISLAR" EntitySet="SATISLAR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SATISLAR_URUNLER" Association="Self.FK_SATISLAR_URUNLER">
+            <End Role="URUNLER" EntitySet="URUNLER" />
+            <End Role="SATISLAR" EntitySet="SATISLAR" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MagazaUrunStokMVCModelStoreContainer" CdmEntityContainer="MagazaUrunStokMVCEntities">
+          <EntitySetMapping Name="KATEGORILER">
+            <EntityTypeMapping TypeName="MagazaUrunStokMVCModel.KATEGORILER">
+              <MappingFragment StoreEntitySet="KATEGORILER">
+                <ScalarProperty Name="durum" ColumnName="durum" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="ad" ColumnName="ad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MUSTERILER">
+            <EntityTypeMapping TypeName="MagazaUrunStokMVCModel.MUSTERILER">
+              <MappingFragment StoreEntitySet="MUSTERILER">
+                <ScalarProperty Name="durum" ColumnName="durum" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="ad" ColumnName="ad" />
+                <ScalarProperty Name="soyad" ColumnName="soyad" />
+                <ScalarProperty Name="sehir" ColumnName="sehir" />
+                <ScalarProperty Name="bakiye" ColumnName="bakiye" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PERSONELLER">
+            <EntityTypeMapping TypeName="MagazaUrunStokMVCModel.PERSONELLER">
+              <MappingFragment StoreEntitySet="PERSONELLER">
+                <ScalarProperty Name="durum" ColumnName="durum" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="ad" ColumnName="ad" />
+                <ScalarProperty Name="soyad" ColumnName="soyad" />
+                <ScalarProperty Name="departman" ColumnName="departman" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SATISLAR">
+            <EntityTypeMapping TypeName="MagazaUrunStokMVCModel.SATISLAR">
+              <MappingFragment StoreEntitySet="SATISLAR">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="urun" ColumnName="urun" />
+                <ScalarProperty Name="personel" ColumnName="personel" />
+                <ScalarProperty Name="musteri" ColumnName="musteri" />
+                <ScalarProperty Name="fiyat" ColumnName="fiyat" />
+                <ScalarProperty Name="tarih" ColumnName="tarih" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="URUNLER">
+            <EntityTypeMapping TypeName="MagazaUrunStokMVCModel.URUNLER">
+              <MappingFragment StoreEntitySet="URUNLER">
+                <ScalarProperty Name="durum" ColumnName="durum" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="ad" ColumnName="ad" />
+                <ScalarProperty Name="marka" ColumnName="marka" />
+                <ScalarProperty Name="stok" ColumnName="stok" />
+                <ScalarProperty Name="alisfiyat" ColumnName="alisfiyat" />
+                <ScalarProperty Name="satisfiyat" ColumnName="satisfiyat" />
+                <ScalarProperty Name="kategori" ColumnName="kategori" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

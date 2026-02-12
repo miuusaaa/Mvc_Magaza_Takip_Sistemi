@@ -1,0 +1,37 @@
+﻿@using Mağaza_Ürün_Takip_Sistemi.Models.Entity;
+@model List<URUNLER>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<table class="table table-bordered">
+    <tr>
+        <th>ID</th>
+        <th>AD</th>
+        <th>MARKA</th>
+        <th>STOK</th>
+        <th>ALIŞ FİYATI</th>
+        <th>SATIŞ FİYATI</th>
+        <th>KATEGORİ ADI</th>
+        <th>SİL</th>
+        <th>GÜNCELLE</th>
+    </tr>
+    @foreach (var items in Model)
+    {
+        <tr>
+            <td>@items.id</td>
+            <td>@items.ad</td>
+            <td>@items.marka</td>
+            <td>@items.stok</td>
+            <td>@items.alisfiyat</td>
+            <td>@items.satisfiyat</td>
+            <td>@items.KATEGORILER.ad</td>
+            <td><a href="/Urun/UrunSil/@items.id" class="btn btn-danger">Sil</a></td>
+            <td><a href="/Urun/UrunGetir/@items.id" class="btn btn-success">Güncelle</a></td>
+        </tr>
+    }
+</table>
+
+<a href="/Urun/YeniUrun" class="btn btn-primary">YENİ ÜRÜN EKLE</a>

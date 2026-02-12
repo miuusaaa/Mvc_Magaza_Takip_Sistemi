@@ -1,0 +1,27 @@
+﻿@model Mağaza_Ürün_Takip_Sistemi.Models.Entity.URUNLER
+@{
+    ViewBag.Title = "UrunGetir";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("UrunGuncelle", "Urun", FormMethod.Post))
+{
+    @Html.HiddenFor(X => X.id, new { @class = "form-control" })
+
+    @Html.TextBoxFor(X => X.ad, new { @class = "form-control" })
+    <br />
+    @Html.TextBoxFor(X => X.marka, new { @class = "form-control" })
+    <br />
+    @Html.TextBoxFor(X => X.stok, new { @class = "form-control" })
+    <br />
+    @Html.TextBoxFor(X => X.alisfiyat, new { @class = "form-control" })
+    <br />
+    @Html.TextBoxFor(X => X.satisfiyat, new { @class = "form-control" })
+    <br />
+    @Html.DropDownListFor(x => x.KATEGORILER.id, (List<SelectListItem>)ViewBag.kat, new { @class = "form-control" })
+    <br />
+    <button class="btn btn-warning">GÜNCELLE</button>
+}
+
+
+

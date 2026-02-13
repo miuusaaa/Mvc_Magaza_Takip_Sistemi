@@ -14,6 +14,7 @@
         <AssociationConnector Association="MagazaUrunStokMVCModel.FK_SATISLAR_MUSTERILER" ManuallyRouted="false" />
         <AssociationConnector Association="MagazaUrunStokMVCModel.FK_SATISLAR_PERSONELLER" ManuallyRouted="false" />
         <AssociationConnector Association="MagazaUrunStokMVCModel.FK_SATISLAR_URUNLER" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="MagazaUrunStokMVCModel.ADMIN_GIRIS" Width="1.5" PointX="5.375" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

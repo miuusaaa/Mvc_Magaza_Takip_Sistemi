@@ -1,27 +1,53 @@
 ﻿@model Mağaza_Ürün_Takip_Sistemi.Models.Entity.URUNLER
 @{
-    ViewBag.Title = "UrunGetir";
+    ViewBag.Title = "Ürün Güncelle";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-@using (Html.BeginForm("UrunGuncelle", "Urun", FormMethod.Post))
-{
-    @Html.HiddenFor(X => X.id, new { @class = "form-control" })
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="content-box animate__animated animate__fadeIn" style="background: rgba(255,255,255,0.15); padding: 30px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2);">
+            <h3 style="text-align:center; margin-bottom: 25px;"><i class="fa fa-sync-alt"></i> Ürün Bilgilerini Güncelle</h3>
 
-    @Html.TextBoxFor(X => X.ad, new { @class = "form-control" })
-    <br />
-    @Html.TextBoxFor(X => X.marka, new { @class = "form-control" })
-    <br />
-    @Html.TextBoxFor(X => X.stok, new { @class = "form-control" })
-    <br />
-    @Html.TextBoxFor(X => X.alisfiyat, new { @class = "form-control" })
-    <br />
-    @Html.TextBoxFor(X => X.satisfiyat, new { @class = "form-control" })
-    <br />
-    @Html.DropDownListFor(x => x.KATEGORILER.id, (List<SelectListItem>)ViewBag.kat, new { @class = "form-control" })
-    <br />
-    <button class="btn btn-warning">GÜNCELLE</button>
-}
+            @using (Html.BeginForm("UrunGuncelle", "Urun", FormMethod.Post))
+            {
+                @Html.HiddenFor(X => X.id)
 
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Ürün Adı</label>
+                        @Html.TextBoxFor(X => X.ad, new { @class = "form-control custom-input" })
+                    </div>
+                    <div class="col-md-6">
+                        <label>Marka</label>
+                        @Html.TextBoxFor(X => X.marka, new { @class = "form-control custom-input" })
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-4">
+                        <label>Stok Adedi</label>
+                        @Html.TextBoxFor(X => X.stok, new { @class = "form-control custom-input", type = "number" })
+                    </div>
+                    <div class="col-md-4">
+                        <label>Alış Fiyatı</label>
+                        @Html.TextBoxFor(X => X.alisfiyat, new { @class = "form-control custom-input" })
+                    </div>
+                    <div class="col-md-4">
+                        <label>Satış Fiyatı</label>
+                        @Html.TextBoxFor(X => X.satisfiyat, new { @class = "form-control custom-input" })
+                    </div>
+                </div>
+                <br />
+                <label>Kategori Seçimi</label>
+                @Html.DropDownListFor(x => x.KATEGORILER.id, (List<SelectListItem>)ViewBag.kat, new { @class = "form-control custom-input" })
 
-
+                <br />
+                <button class="btn btn-warning btn-lg btn-block" style="border-radius: 12px; font-weight: bold;">
+                    DEĞİŞİKLİKLERİ KAYDET
+                </button>
+                <a href="/Urun/Index" class="btn btn-link btn-block" style="color:white; margin-top:10px;">Vazgeç</a>
+            }
+        </div>
+    </div>
+</div>

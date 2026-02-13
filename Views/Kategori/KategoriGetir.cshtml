@@ -1,16 +1,49 @@
 ﻿@model Mağaza_Ürün_Takip_Sistemi.Models.Entity.KATEGORILER
 @{
-    ViewBag.Title = "KategoriGetir";
+    ViewBag.Title = "Kategori Güncelle";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-@using (Html.BeginForm("KategoriGuncelle", "Kategori", FormMethod.Post))
-{
-    @Html.HiddenFor(X=>X.id, new {@class = "form-control"})   
-    @Html.TextBoxFor(X=>X.ad, new {@class = "form-control"})
-    <br />
-    <button class="btn btn-warning">GÜNCELLE</button>
-}
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <div class="animate__animated animate__fadeInDown" style="background: rgba(255,255,255,0.15); padding: 30px; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1);">
 
+            <h2 style="color: white; text-align: center; margin-bottom: 30px;">
+                <i class="fa fa-edit"></i> Kategori Güncelleme
+            </h2>
 
+            @using (Html.BeginForm("KategoriGuncelle", "Kategori", FormMethod.Post))
+            {
+                @Html.HiddenFor(x => x.id)
 
+                <div class="form-group">
+                    <label style="color: white; font-size: 16px; margin-bottom: 10px;">Kategori Kimliği (ID)</label>
+                    @Html.TextBoxFor(x => x.id, new { @class = "form-control", @disabled = "disabled", style = "background: rgba(0,0,0,0.2); color: #ddd; border: none; border-radius: 10px; height: 45px;" })
+                </div>
+
+                <div class="form-group" style="margin-top: 20px;">
+                    <label style="color: white; font-size: 16px; margin-bottom: 10px;">Kategori Adı</label>
+                    @Html.TextBoxFor(x => x.ad, new { @class = "form-control", placeholder = "Kategori adını giriniz...", style = "background: rgba(255,255,255,0.9); border-radius: 10px; height: 45px; font-weight: bold; color: #333;" })
+                </div>
+
+                <div style="margin-top: 30px;">
+                    <button class="btn btn-warning btn-lg btn-block" style="border-radius: 15px; font-weight: bold; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(240, 173, 78, 0.4);">
+                        <i class="fa fa-sync-alt"></i> BİLGİLERİ GÜNCELLE
+                    </button>
+
+                    <a href="/Kategori/Index" class="btn btn-default btn-block" style="margin-top: 15px; background: transparent; border: 1px solid white; color: white; border-radius: 15px;">
+                        <i class="fa fa-arrow-left"></i> Vazgeç ve Geri Dön
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Input odaklandığında parlaması için */
+    .form-control:focus {
+        border-color: #f0ad4e;
+        box-shadow: 0 0 10px rgba(240, 173, 78, 0.5);
+    }
+</style>

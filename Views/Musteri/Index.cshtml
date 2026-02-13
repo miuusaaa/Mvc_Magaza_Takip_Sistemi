@@ -4,45 +4,113 @@
 @model PagedList.IPagedList<MUSTERILER>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Müşteri Listesi";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<table class="table table-bordered">
-    <tr>
-        <th>ID</th>
-        <th>AD</th>
-        <th>SOYAD</th>
-        <th>ŞEHİR</th>
-        <th>BAKİYE</th>
-        <th>SİL</th>
-        <th>GÜNCELLE</th>
+<div class="row">
+    <div class="col-md-12">
+        <h2 class="animate__animated animate__fadeInLeft" style="margin-bottom: 25px; color: white;">
+            <i class="fa fa-users"></i> Müşteri Portföyü
+        </h2>
 
-    </tr>
-    @foreach (var items in Model)
-    {
-        <tr>
-            <td>@items.id</td>
-            <td>@items.ad</td>
-            <td>@items.soyad</td>
-            <td>@items.sehir</td>
-            <td>@items.bakiye</td>
-            <td>
-                @*Müşteri silmeyi post ile yaptık , httpget güvenli değilmiş*@
-                @using (Html.BeginForm("MusteriSil", "Musteri", FormMethod.Post))
+        <div class="well" style="background: rgba(255,255,255,0.1); border: none; border-radius: 15px; padding: 20px;">
+            @using (Html.BeginForm("Index", "Musteri", FormMethod.Get))
+            {
+                <div class="input-group">
+                    <span class="input-group-addon" style="background: rgba(255,255,255,0.2); border: none; color: white;">
+                        <i class="fa fa-search"></i>
+                    </span>
+                    @Html.TextBox("p", null, new { @class = "form-control", placeholder = "Müşteri ismine göre filtrele...", style = "background: rgba(255,255,255,0.9); border: none; height: 45px;" })
+                    <span class="input-group-btn">
+                        <button type="submit" class="btn btn-primary" style="height: 45px; padding: 0 30px; font-weight: bold;">Sorgula</button>
+                    </span>
+                </div>
+            }
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-hover animate__animated animate__fadeInUp" style="background: rgba(255,255,255,0.95); border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+                <thead style="background: #1d2671; color: white;">
+                    <tr>
+                        <th style="padding: 15px;">#ID</th>
+                        <th style="padding: 15px;">AD</th>
+                        <th style="padding: 15px;">SOYAD</th>
+                        <th style="padding: 15px;">ŞEHİR</th>
+                        <th style="padding: 15px;">BAKİYE</th>
+                        <th style="padding: 15px; text-align: center;">İŞLEMLER</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var items in Model)
+                    {
+                        <tr>
+                            <td style="font-weight: bold; vertical-align: middle;">@items.id</td>
+                            <td style="vertical-align: middle;">@items.ad</td>
+                            <td style="vertical-align: middle;">@items.soyad</td>
+                            <td style="vertical-align: middle;"><span class="label label-info" style="font-size: 11px;">@items.sehir</span></td>
+                            <td style="vertical-align: middle; font-weight: bold; color: #27ae60;">@items.bakiye ₺</td>
+                            <td style="text-align: center; vertical-align: middle;">
+                                <div style="display: flex; justify-content: center; gap: 5px;">
+                                    <a href="/Musteri/MusteriGetir/@items.id" class="btn btn-success btn-sm" title="Güncelle">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+
+                                    @using (Html.BeginForm("MusteriSil", "Musteri", FormMethod.Post))
+                                    {
+                                        @Html.Hidden("id", items.id)
+                                        <button type="submit" class="btn btn-danger btn-sm" title="Sil"
+                                                onclick="return confirm('@items.ad @items.soyad isimli müşteriyi silmek istediğinize emin misiniz?');">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    }
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="row" style="margin-top: 20px; display: flex; align-items: center;">
+            <div class="col-md-8 pagination-container">
+                @Html.PagedListPager((IPagedList)Model, sayfa => Url.Action("Index", new { sayfa }), new PagedListRenderOptions
                 {
-                    @Html.Hidden("id", items.id)
-                    <button type="submit" class="btn btn-danger"
-                            onclick="return confirm('Bu müşteriyi silmek istiyor musunuz?');">
-                        Sil
-                    </button>
-                }
-            </td>
-            <td><a href="/Musteri/MusteriGetir/@items.id" class="btn btn-success">Güncelle</a></td>
-        </tr>
+                    UlElementClasses = new[] { "pagination" },
+                    ContainerDivClasses = new[] { "custom-pagination" }
+                })
+            </div>
+            <div class="col-md-4 text-right">
+                <a href="/Musteri/YeniMusteriEklemeSayfasi" class="btn btn-info btn-lg" style="border-radius: 12px; font-weight: bold; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+                    <i class="fa fa-user-plus"></i> YENİ MÜŞTERİ
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* PagedList Tasarımı */
+    .pagination > li > a, .pagination > li > span {
+        background: rgba(255,255,255,0.2) !important;
+        border: 1px solid rgba(255,255,255,0.3) !important;
+        color: white !important;
+        margin: 0 3px;
+        border-radius: 5px !important;
     }
-</table>
 
-@Html.PagedListPager((IPagedList)Model,sayfa => Url.Action("Index",new {sayfa}))
+    .pagination > .active > a, .pagination > .active > span {
+        background: #c33764 !important;
+        border-color: #c33764 !important;
+    }
 
-<a href="/Musteri/YeniMusteriEklemeSayfasi" class="btn btn-primary">YENİ MÜŞTERİ EKLE</a>
+    .pagination > li > a:hover {
+        background: #1d2671 !important;
+    }
+
+    /* Tablo Satır Hover Efekti */
+    .table-hover tbody tr:hover {
+        background-color: rgba(0,0,0,0.05) !important;
+        transition: background 0.3s;
+    }
+</style>

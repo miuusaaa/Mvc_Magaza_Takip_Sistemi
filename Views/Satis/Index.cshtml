@@ -2,31 +2,81 @@
 @model List<SATISLAR>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Satış Kayıtları";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
+<div class="row">
+    <div class="col-md-12">
+        <h2 class="animate__animated animate__fadeInLeft" style="color: white; margin-bottom: 25px;">
+            <i class="fa fa-handshake"></i> Satış Geçmişi
+        </h2>
 
-<table class="table table-bordered">
-    <tr>
-        <th>ID</th>
-        <th>ÜRÜN ADI</th>
-        <th>PERSONEL ADI</th>
-        <th>MÜŞTERİ ADI</th>
-        <th>SATIŞ FİYATI</th>
-        <th>SATIŞ TARİHİ</th>
-    </tr>
-    @foreach (var items in Model)
-    {
-        <tr>
-            <td>@items.id</td>
-            <td>@items.URUNLER.ad</td>
-            <td>@items.PERSONELLER.ad @items.PERSONELLER.soyad</td>
-            <td>@items.MUSTERILER.ad @items.MUSTERILER.soyad</td>
-            <td>@items.fiyat</td>
-            <td>@items.tarih</td>
-        </tr>
-    }
-</table>
+        <div class="table-responsive">
+            <table class="table table-hover animate__animated animate__fadeInUp" style="background: rgba(255,255,255,0.95); border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+                <thead style="background: #1d2671; color: white;">
+                    <tr>
+                        <th style="padding: 15px;">ID</th>
+                        <th style="padding: 15px;">ÜRÜN</th>
+                        <th style="padding: 15px;">PERSONEL</th>
+                        <th style="padding: 15px;">MÜŞTERİ</th>
+                        <th style="padding: 15px;">FİYAT</th>
+                        <th style="padding: 15px;">TARİH</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var items in Model)
+                    {
+                        <tr>
+                            <td style="font-weight: bold;">#@items.id</td>
 
-<a href="/Satis/YeniSatis" class="btn btn-primary">YENİ SATIŞ EKLE</a>
+                            @* Ürün Kontrolü *@
+                            <td>
+                                <i class="fa fa-tag" style="color: #c33764;"></i>
+                                @(items.URUNLER != null ? items.URUNLER.ad : "Ürün Silinmiş")
+                            </td>
+
+                            @* Personel Kontrolü *@
+                            <td>
+                                <i class="fa fa-user-tie"></i>
+                                @(items.PERSONELLER != null ? items.PERSONELLER.ad + " " + items.PERSONELLER.soyad : "Personel Yok")
+                            </td>
+
+                            @* Müşteri Kontrolü *@
+                            <td>
+                                <i class="fa fa-user"></i>
+                                @(items.MUSTERILER != null ? items.MUSTERILER.ad + " " + items.MUSTERILER.soyad : "Müşteri Yok")
+                            </td>
+
+                            <td>
+                                <span class="label label-success" style="font-size: 13px; padding: 5px 10px;">
+                                    @items.fiyat ₺
+                                </span>
+                            </td>
+
+                            @* Tarih ve Saniye Kontrolü (Hata vermeyen güvenli yazım) *@
+                            <td>
+                                <span class="text-muted" style="font-size: 13px;">
+                                    <i class="fa fa-clock"></i>
+                                    @if (items.tarih != null)
+                                    {
+                                        @items.tarih.ToString("dd.MM.yyyy HH:mm:ss") }
+                                    else
+                                    {
+                                        <span>-</span>
+                                    }
+                                </span>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div style="margin-top: 20px;">
+            <a href="/Satis/YeniSatis" class="btn btn-primary btn-lg btn-block" style="border-radius: 15px; background: #1d2671; border: none; font-weight: bold; box-shadow: 0 5px 15px rgba(0,0,0,0.3);">
+                <i class="fa fa-cart-plus"></i> YENİ SATIŞ KAYDI OLUŞTUR
+            </a>
+        </div>
+    </div>
+</div>

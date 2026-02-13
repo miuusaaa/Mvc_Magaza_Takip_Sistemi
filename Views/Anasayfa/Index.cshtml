@@ -1,0 +1,134 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<style>
+    body {
+        background: linear-gradient(135deg, #1d2671, #c33764);
+        min-height: 100vh;
+    }
+
+    .welcome-box {
+        color: white;
+        margin-bottom: 40px;
+        animation: fadeIn 1s ease;
+    }
+
+    .dashboard-card {
+        transition: all 0.3s ease;
+        cursor: pointer;
+        border-radius: 12px;
+    }
+
+        .dashboard-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.3);
+        }
+
+    .panel {
+        border-radius: 12px;
+        overflow: hidden;
+    }
+
+    .panel-heading {
+        font-size: 18px;
+        font-weight: bold;
+        color: white !important;
+    }
+
+    .panel-info > .panel-heading {
+        background-color: #3498db;
+    }
+
+    .panel-success > .panel-heading {
+        background-color: #2ecc71;
+    }
+
+    .panel-warning > .panel-heading {
+        background-color: #f39c12;
+    }
+
+    .panel-danger > .panel-heading {
+        background-color: #e74c3c;
+    }
+
+    .panel-body {
+        background-color: #ffffff;
+    }
+
+    .panel-footer {
+        background-color: #f7f7f7;
+    }
+
+    @@keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
+
+<div class="jumbotron text-center welcome-box" style="background: transparent;">
+    <h1>Mağaza Yönetim Sistemine Hoşgeldiniz</h1>
+    <p>Ürün, müşteri, kategori ve satış işlemlerini kolayca yönetin.</p>
+</div>
+
+<div class="row text-center">
+
+    <div class="col-md-3">
+        <div class="panel panel-info dashboard-card">
+            <div class="panel-heading">Ürünler</div>
+            <div class="panel-body">
+                Ürün yönetimine git
+            </div>
+            <div class="panel-footer">
+                <a href="/Urun/Index" class="btn btn-info btn-sm">Aç</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="panel panel-success dashboard-card">
+            <div class="panel-heading">Müşteriler</div>
+            <div class="panel-body">
+                Müşteri kayıtlarını görüntüle
+            </div>
+            <div class="panel-footer">
+                <a href="/Musteri/Index" class="btn btn-success btn-sm">Aç</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="panel panel-warning dashboard-card">
+            <div class="panel-heading">Kategoriler</div>
+            <div class="panel-body">
+                Kategori düzenleme ekranı
+            </div>
+            <div class="panel-footer">
+                <a href="/Kategori/Index" class="btn btn-warning btn-sm">Aç</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="panel panel-danger dashboard-card">
+            <div class="panel-heading">Satışlar</div>
+            <div class="panel-body">
+                Satış kayıtlarını incele
+            </div>
+            <div class="panel-footer">
+                <a href="/Satis/Index" class="btn btn-danger btn-sm">Aç</a>
+            </div>
+        </div>
+    </div>
+
+</div>

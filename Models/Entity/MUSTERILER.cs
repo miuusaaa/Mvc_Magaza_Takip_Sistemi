@@ -11,8 +11,7 @@ namespace Mağaza_Ürün_Takip_Sistemi.Models.Entity
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class MUSTERILER
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,9 +21,7 @@ namespace Mağaza_Ürün_Takip_Sistemi.Models.Entity
         }
     
         public int id { get; set; }
-        [Required(ErrorMessage = "Ad alanı boş bırakılamaz.")]
         public string ad { get; set; }
-        [Required(ErrorMessage = "Soyad alanı boş bırakılamaz.")]
         public string soyad { get; set; }
         public string sehir { get; set; }
         public Nullable<decimal> bakiye { get; set; }

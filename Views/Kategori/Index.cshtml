@@ -1,27 +1,67 @@
 ﻿@using Mağaza_Ürün_Takip_Sistemi.Models.Entity;
-@model List<KATEGORILER> 
+@model List<KATEGORILER>
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<table class="table table-bordered">
-    <tr>
-     <th>ID</th>
-     <th>KATEGORİ ADI</th>
-     <th>SİL</th>
-     <th>GÜNCELLE</th>
-    </tr>
-    @foreach(var items in Model)
-            {
-                <tr>
-                    <td>@items.id</td>
-                    <td>@items.ad</td>
-                    <td><a href="/Kategori/KategoriSil/@items.id" class="btn btn-danger">Sil</a></td>
-                    <td><a href="/Kategori/KategoriGetir/@items.id" class="btn btn-success">Güncelle</a></td>
-                </tr>
-            }
-</table>
+<div class="row">
+    <div class="col-md-12">
+        <h2 class="animate__animated animate__fadeInLeft" style="margin-bottom: 25px;">
+            <i class="fa fa-tags"></i> Kategori Yönetimi
+        </h2>
 
-<a href="/Kategori/YeniKategori" class="btn btn-primary">YENİ KATEGORİ EKLE</a>
+        <div class="well" style="background: rgba(255,255,255,0.1); border: none; border-radius: 15px;">
+            @using (Html.BeginForm("Index", "Kategori", FormMethod.Get))
+            {
+                <div class="input-group">
+                    @Html.TextBox("p", null, new { @class = "form-control", placeholder = "Kategori adına göre ara...", style = "background: rgba(255,255,255,0.9); border-radius: 20px 0 0 20px; height: 45px;" })
+                    <span class="input-group-btn">
+                        <button type="submit" class="btn btn-primary" style="height: 45px; border-radius: 0 20px 20px 0; padding: 0 25px;">
+                            <i class="fa fa-search"></i> Ara
+                        </button>
+                    </span>
+                </div>
+            }
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-hover animate__animated animate__fadeInUp" style="background: rgba(255,255,255,0.95); border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+                <thead style="background: #333; color: white;">
+                    <tr>
+                        <th style="padding: 15px;">ID</th>
+                        <th style="padding: 15px;">KATEGORİ ADI</th>
+                        <th style="padding: 15px; text-align: center;">SİL</th>
+                        <th style="padding: 15px; text-align: center;">GÜNCELLE</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var items in Model)
+                    {
+                        <tr>
+                            <td style="padding: 12px; font-weight: bold; color: #1d2671;">#@items.id</td>
+                            <td style="padding: 12px;">@items.ad</td>
+                            <td style="text-align: center;">
+                                <a href="/Kategori/KategoriSil/@items.id" class="btn btn-danger btn-sm" onclick="return confirm('Silmek istediğinize emin misiniz?')">
+                                    <i class="fa fa-trash"></i> Sil
+                                </a>
+                            </td>
+                            <td style="text-align: center;">
+                                <a href="/Kategori/KategoriGetir/@items.id" class="btn btn-success btn-sm">
+                                    <i class="fa fa-edit"></i> Güncelle
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div style="margin-top: 20px;">
+            <a href="/Kategori/YeniKategori" class="btn btn-info btn-lg btn-block" style="border-radius: 15px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 5px 15px rgba(0,0,0,0.3);">
+                <i class="fa fa-plus-circle"></i> Yeni Kategori Ekle
+            </a>
+        </div>
+    </div>
+</div>

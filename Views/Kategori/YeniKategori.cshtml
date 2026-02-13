@@ -1,17 +1,62 @@
-﻿
-@{
-    ViewBag.Title = "YeniKategori";
+﻿@{
+    ViewBag.Title = "Yeni Kategori Ekle";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>YENİ KATEGORİ EKLEME SAYFASINDASINIZ....</h2>
-<br />
-<br />
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <div class="animate__animated animate__zoomIn" style="background: rgba(255,255,255,0.15); padding: 40px; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.2);">
 
-<form method="post">
-    <input type="text" class="form-control" name="ad" placeholder="KATEGORİ ADINI GİRİN..."/>
-    <br />
-    <br />
-    <button class="btn btn-danger">EKLE</button>
-</form>
+            <div style="text-align: center; margin-bottom: 30px;">
+                <i class="fa fa-plus-circle fa-4x" style="color: #fff; margin-bottom: 15px;"></i>
+                <h2 style="color: white; margin: 0; font-weight: 300; letter-spacing: 1px;">YENİ KATEGORİ</h2>
+                <p style="color: rgba(255,255,255,0.7); margin-top: 10px;">Sisteme yeni bir kategori tanımlayın</p>
+            </div>
 
+            <form method="post">
+                <div class="form-group">
+                    <label style="color: white; font-size: 14px; text-transform: uppercase; letter-spacing: 1px;">Kategori Adı</label>
+                    <input type="text"
+                           class="form-control text-box-custom"
+                           name="ad"
+                           placeholder="Örn: Elektronik, Kozmetik..."
+                           required
+                           autocomplete="off" />
+                </div>
+
+                <div style="margin-top: 35px;">
+                    <button class="btn btn-primary btn-lg btn-block" style="background: #1d2671; border: none; border-radius: 12px; font-weight: bold; padding: 12px; transition: all 0.3s ease;">
+                        <i class="fa fa-save"></i> KATEGORİYİ KAYDET
+                    </button>
+
+                    <a href="/Kategori/Index" class="btn btn-link btn-block" style="color: rgba(255,255,255,0.8); margin-top: 10px; text-decoration: none;">
+                        <i class="fa fa-times"></i> İptal Et
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    .text-box-custom {
+        background: rgba(255,255,255,0.9) !important;
+        border: none !important;
+        border-radius: 12px !important;
+        height: 50px !important;
+        font-size: 16px !important;
+        box-shadow: inset 0 2px 5px rgba(0,0,0,0.1) !important;
+        transition: all 0.3s ease !important;
+    }
+
+        .text-box-custom:focus {
+            background: #fff !important;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2) !important;
+        }
+
+    .btn-primary:hover {
+        background: #c33764 !important; /* Temandaki diğer renk */
+        transform: scale(1.02);
+    }
+</style>

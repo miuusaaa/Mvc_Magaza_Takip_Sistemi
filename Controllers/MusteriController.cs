@@ -9,16 +9,25 @@ using PagedList.Mvc;
 
 namespace Mağaza_Ürün_Takip_Sistemi.Controllers
 {
+    [Authorize]
     public class MusteriController : Controller
     {
+        
         // GET: Musteri
         MagazaUrunStokMVCEntities db = new MagazaUrunStokMVCEntities();
-        public ActionResult Index(int sayfa = 1)
+        [AllowAnonymous]
+        public ActionResult Index(string p,int sayfa = 1)
         {
-            var musteri = db.MUSTERILER.Where(x => x.durum == true).ToList().ToPagedList(sayfa,2);
-            return View(musteri);
+            var musteri = db.MUSTERILER.Where(x => x.durum == true);
+
+            if(!string.IsNullOrEmpty(p))
+            {
+                musteri = musteri.Where(m => ((m.ad + " " + m.soyad).Contains(p) || m.ad.Contains(p) || m.soyad.Contains(p)) && m.durum == true); 
+            }
+            return View(musteri.ToList().ToPagedList(sayfa, 2));
         }
 
+        
         [HttpGet]
         public ActionResult YeniMusteriEklemeSayfasi()
         {

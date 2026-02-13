@@ -1,38 +1,74 @@
 ﻿@model Mağaza_Ürün_Takip_Sistemi.Models.Entity.URUNLER
 @{
-    ViewBag.Title = "YeniUrun";
+    ViewBag.Title = "Yeni Ürün";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="animate__animated animate__zoomIn" style="background: rgba(255,255,255,0.2); padding: 40px; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.4);">
+            <h2 style="text-align: center; font-weight: bold;"><i class="fa fa-plus-square"></i> YENİ ÜRÜN EKLE</h2>
+            <hr style="border-color: rgba(255,255,255,0.1);" />
 
-<h2>YENİ ÜRÜN EKLEME SAYFASINDASINIZ....</h2>
-<br />
-<br />
+            @using (Html.BeginForm("YeniUrun", "Urun", FormMethod.Post))
+            {
+                <div class="form-group">
+                    <label>Ürün Adı</label>
+                    @Html.TextBoxFor(x => x.ad, new { @class = "form-control custom-input", placeholder = "Ürün ismini giriniz" })
+                </div>
 
-<form method="post">
-    <label>Yeni Ürün Adı</label>
-    @Html.TextBoxFor(x => x.ad, new { @class = "form-control" })
-    <br />
-    <br />
-    <label>Yeni Ürün Markası</label>
-    @Html.TextBoxFor(x => x.marka, new { @class = "form-control" })
-    <br />
-    <br />
-    <label>Yeni Ürün Stoğu</label>
-    @Html.TextBoxFor(x => x.stok, new { @class = "form-control" })
-    <br />
-    <br />
-    <label>Yeni Ürün Alış Fiyatı</label>
-    @Html.TextBoxFor(x => x.alisfiyat, new { @class = "form-control" })
-    <br />
-    <br />
-    <label>Yeni Ürün Satış Fiyatı</label>
-    @Html.TextBoxFor(x => x.satisfiyat, new { @class = "form-control" })
-    <br />
-    <br />
-    <label>Yeni Ürün Kategorisi</label>
-    @Html.DropDownListFor(x => x.KATEGORILER.id, (List<SelectListItem>)ViewBag.ktg , new { @class = "form-control" })
-    <br />
-    <br />
-    <button class="btn btn-danger">EKLE</button>
-</form>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Marka</label>
+                        @Html.TextBoxFor(x => x.marka, new { @class = "form-control custom-input", placeholder = "Marka bilgisi" })
+                    </div>
+                    <div class="col-md-6">
+                        <label>Kategori</label>
+                        @Html.DropDownListFor(x => x.KATEGORILER.id, (List<SelectListItem>)ViewBag.ktg, "Kategori Seçiniz", new { @class = "form-control custom-input" })
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-4">
+                        <label>Stok</label>
+                        @Html.TextBoxFor(x => x.stok, new { @class = "form-control custom-input", type = "number" })
+                    </div>
+                    <div class="col-md-4">
+                        <label>Alış (₺)</label>
+                        @Html.TextBoxFor(x => x.alisfiyat, new { @class = "form-control custom-input" })
+                    </div>
+                    <div class="col-md-4">
+                        <label>Satış (₺)</label>
+                        @Html.TextBoxFor(x => x.satisfiyat, new { @class = "form-control custom-input" })
+                    </div>
+                </div>
+
+                <br />
+                <button class="btn btn-danger btn-lg btn-block" style="border-radius: 12px; font-weight: bold; background: #c33764; border:none;">
+                    <i class="fa fa-save"></i> ÜRÜNÜ KAYDET
+                </button>
+            }
+        </div>
+    </div>
+</div>
+
+<style>
+    .custom-input {
+        background: rgba(255,255,255,0.9) !important;
+        border: none !important;
+        border-radius: 10px !important;
+        height: 45px !important;
+        color: #333 !important;
+    }
+
+        .custom-input:focus {
+            box-shadow: 0 0 15px rgba(255,255,255,0.5) !important;
+            background: #fff !important;
+        }
+
+    label {
+        color: white;
+        margin-top: 10px;
+        font-weight: 500;
+    }
+</style>

@@ -1,0 +1,91 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <title>Admin Giriş</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- FontAwesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+
+    <!-- Animate.css -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #1d2671, #c33764);
+            height: 100vh;
+        }
+        .main-title {
+            color: white;
+            font-size: 100px; /* BÜYÜK YAZI */
+            font-weight: 700;
+            text-align: center;
+            transform: translateY(-90px); /* sadece yazıyı yukarı alır */
+            text-shadow: 0 4px 8px rgba(0,0,0,0.4);
+            white-space: nowrap;
+        }
+        .login-card {
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.3);
+        }
+
+        .login-header {
+            background-color: #1d2671;
+            color: white;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+
+        .btn-login {
+            background-color: #1d2671;
+            color: white;
+            transition: transform .3s ease;
+        }
+
+            .btn-login:hover {
+                transform: scale(1.05);
+                background-color: #142057;
+            }
+
+        .form-control:focus {
+            box-shadow: none;
+            border-color: #1d2671;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="d-flex flex-column justify-content-center align-items-center vh-100">
+            <div class="main-title mb-4">
+                Mağaza Yönetim Sistemi
+            </div>
+            <div class="col-md-4">
+                <div class="card login-card animate__animated animate__fadeInUp">
+
+                    <div class="card-header login-header text-center">
+                        <h4><i class="fa fa-lock"></i>Giriş Yap</h4>
+                    </div>
+                    <div class="card-body p-4">
+                        @RenderBody()
+                    </div>
+                    <div class="card-footer text-center">
+                        <small>© @DateTime.Now.Year</small>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

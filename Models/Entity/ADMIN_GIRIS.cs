@@ -12,17 +12,10 @@ namespace Mağaza_Ürün_Takip_Sistemi.Models.Entity
     using System;
     using System.Collections.Generic;
     
-    public partial class SATISLAR
+    public partial class ADMIN_GIRIS
     {
         public int id { get; set; }
-        public Nullable<int> urun { get; set; }
-        public Nullable<int> personel { get; set; }
-        public Nullable<int> musteri { get; set; }
-        public Nullable<decimal> fiyat { get; set; }
-        public System.DateTime tarih { get; set; }
-    
-        public virtual MUSTERILER MUSTERILER { get; set; }
-        public virtual PERSONELLER PERSONELLER { get; set; }
-        public virtual URUNLER URUNLER { get; set; }
+        public string kullanici { get; set; }
+        public string sifre { get; set; }
     }
 }

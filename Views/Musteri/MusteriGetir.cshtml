@@ -1,27 +1,99 @@
 ﻿@model Mağaza_Ürün_Takip_Sistemi.Models.Entity.MUSTERILER
 @{
-    ViewBag.Title = "MusteriGetir";
+    ViewBag.Title = "Müşteri Güncelle";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-@using (Html.BeginForm("MusteriGuncelle", "Musteri", FormMethod.Post))
-{
-    @Html.HiddenFor(X => X.id, new { @class = "form-control" })
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="animate__animated animate__fadeInUp" style="background: rgba(255,255,255,0.15); padding: 40px; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.2);">
 
-    @Html.TextBoxFor(X => X.ad, new { @class = "form-control" })
-    @Html.ValidationMessageFor(x => x.ad, "", new { @style = "color : green" })
-    <br />
-    <br />
-    @Html.TextBoxFor(X => X.soyad, new { @class = "form-control" })
-    @Html.ValidationMessageFor(x => x.soyad, "", new { @style = "color : green" })
-    <br />
-    <br />
-    @Html.TextBoxFor(X => X.sehir, new { @class = "form-control" })
-    <br />
+            <div style="text-align: center; margin-bottom: 30px;">
+                <h2 style="color: white; font-weight: 300;">
+                    <i class="fa fa-user-edit"></i> Müşteri Bilgilerini Güncelle
+                </h2>
+                <hr style="border-color: rgba(255,255,255,0.1);" />
+            </div>
 
-    @Html.TextBoxFor(x => x.bakiye, new{@class = "form-control",})
-    @Html.ValidationMessageFor(x => x.bakiye, "", new { @style = "color : green" })
-    <br />
-    <button class="btn btn-warning">GÜNCELLE</button>
-}
+            @using (Html.BeginForm("MusteriGuncelle", "Musteri", FormMethod.Post))
+            {
+                @Html.HiddenFor(x => x.id)
 
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label style="color: white;"><i class="fa fa-id-card"></i> Müşteri Adı</label>
+                            @Html.TextBoxFor(x => x.ad, new { @class = "form-control custom-input", placeholder = "Ad" })
+                            @Html.ValidationMessageFor(x => x.ad, "", new { @class = "text-validation" })
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label style="color: white;"><i class="fa fa-id-card"></i> Müşteri Soyadı</label>
+                            @Html.TextBoxFor(x => x.soyad, new { @class = "form-control custom-input", placeholder = "Soyad" })
+                            @Html.ValidationMessageFor(x => x.soyad, "", new { @class = "text-validation" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" style="margin-top: 15px;">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label style="color: white;"><i class="fa fa-map-marker-alt"></i> Şehir</label>
+                            @Html.TextBoxFor(x => x.sehir, new { @class = "form-control custom-input", placeholder = "Şehir" })
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label style="color: white;"><i class="fa fa-wallet"></i> Bakiye (₺)</label>
+                            @Html.TextBoxFor(x => x.bakiye, new { @class = "form-control custom-input", placeholder = "0.00" })
+                            @Html.ValidationMessageFor(x => x.bakiye, "", new { @class = "text-validation" })
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 30px;">
+                    <button class="btn btn-warning btn-lg btn-block" style="border-radius: 12px; font-weight: bold; color: #333; box-shadow: 0 5px 15px rgba(240, 173, 78, 0.3);">
+                        <i class="fa fa-save"></i> DEĞİŞİKLİKLERİ KAYDET
+                    </button>
+
+                    <a href="/Musteri/Index" class="btn btn-link btn-block" style="color: white; margin-top: 10px; opacity: 0.8;">
+                        <i class="fa fa-chevron-left"></i> Listeye Geri Dön
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<style>
+    .custom-input {
+        background: rgba(255,255,255,0.9) !important;
+        border: none !important;
+        border-radius: 10px !important;
+        height: 45px !important;
+        font-weight: 500;
+        transition: all 0.3s;
+    }
+
+        .custom-input:focus {
+            background: #fff !important;
+            box-shadow: 0 0 15px rgba(255,255,255,0.4) !important;
+            transform: scale(1.01);
+        }
+
+    .text-validation {
+        color: #2ecc71; /* Gradyan üzerinde daha iyi görünen bir yeşil */
+        font-size: 12px;
+        font-weight: bold;
+        display: block;
+        margin-top: 5px;
+    }
+
+    label i {
+        margin-right: 5px;
+        opacity: 0.8;
+    }
+</style>

@@ -1,37 +1,68 @@
 ﻿@using Mağaza_Ürün_Takip_Sistemi.Models.Entity;
 @model List<URUNLER>
-
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Ürün Listesi";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<table class="table table-bordered">
-    <tr>
-        <th>ID</th>
-        <th>AD</th>
-        <th>MARKA</th>
-        <th>STOK</th>
-        <th>ALIŞ FİYATI</th>
-        <th>SATIŞ FİYATI</th>
-        <th>KATEGORİ ADI</th>
-        <th>SİL</th>
-        <th>GÜNCELLE</th>
-    </tr>
-    @foreach (var items in Model)
-    {
-        <tr>
-            <td>@items.id</td>
-            <td>@items.ad</td>
-            <td>@items.marka</td>
-            <td>@items.stok</td>
-            <td>@items.alisfiyat</td>
-            <td>@items.satisfiyat</td>
-            <td>@items.KATEGORILER.ad</td>
-            <td><a href="/Urun/UrunSil/@items.id" class="btn btn-danger">Sil</a></td>
-            <td><a href="/Urun/UrunGetir/@items.id" class="btn btn-success">Güncelle</a></td>
-        </tr>
-    }
-</table>
+<h2 class="animate__animated animate__fadeInLeft" style="color: white; margin-bottom: 20px;">
+    <i class="fa fa-box-open"></i> Ürün Yönetimi
+</h2>
 
-<a href="/Urun/YeniUrun" class="btn btn-primary">YENİ ÜRÜN EKLE</a>
+<div class="well animate__animated animate__fadeInDown" style="background: rgba(255,255,255,0.1); border: none; border-radius: 15px;">
+    @using (Html.BeginForm("Index", "Urun", FormMethod.Get))
+    {
+        <div class="input-group">
+            @Html.TextBox("p", null, new { @class = "form-control", placeholder = "Ürün adı ile ara...", style = "background: rgba(255,255,255,0.9); border-radius: 20px 0 0 20px; height: 45px;" })
+            <span class="input-group-btn">
+                <button type="submit" class="btn btn-primary" style="height: 45px; border-radius: 0 20px 20px 0; padding: 0 25px;">
+                    <i class="fa fa-search"></i> Ara
+                </button>
+            </span>
+        </div>
+    }
+</div>
+
+<div class="table-responsive">
+    <table class="table table-hover animate__animated animate__fadeInUp" style="background: rgba(255,255,255,0.95); border-radius: 15px; overflow: hidden;">
+        <thead style="background: #1d2671; color: white;">
+            <tr>
+                <th>ID</th>
+                <th>ÜRÜN ADI</th>
+                <th>MARKA</th>
+                <th>STOK</th>
+                <th>ALIŞ</th>
+                <th>SATIŞ</th>
+                <th>KATEGORİ</th>
+                <th style="text-align:center;">İŞLEMLER</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var items in Model)
+            {
+                <tr>
+                    <td style="font-weight:bold;">#@items.id</td>
+                    <td>@items.ad</td>
+                    <td>@items.marka</td>
+                    <td>
+                        @{
+                            var stokClass = items.stok < 10 ? "label-danger" : "label-success";
+                        }
+                        <span class="label @stokClass" style="font-size: 12px;">@items.stok</span>
+                    </td>
+                    <td style="color: #e74c3c;">@items.alisfiyat ₺</td>
+                    <td style="color: #27ae60; font-weight:bold;">@items.satisfiyat ₺</td>
+                    <td><span class="badge" style="background:#c33764">@items.KATEGORILER.ad</span></td>
+                    <td style="text-align:center;">
+                        <a href="/Urun/UrunGetir/@items.id" class="btn btn-success btn-sm"><i class="fa fa-edit"></i></a>
+                        <a href="/Urun/UrunSil/@items.id" class="btn btn-danger btn-sm" onclick="return confirm('Silmek istediğinize emin misiniz?')"><i class="fa fa-trash"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<a href="/Urun/YeniUrun" class="btn btn-info btn-lg btn-block animate__animated animate__fadeInUp" style="border-radius: 15px; font-weight: bold;">
+    <i class="fa fa-plus-circle"></i> YENİ ÜRÜN EKLE
+</a>

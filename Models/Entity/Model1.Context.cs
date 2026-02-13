@@ -30,5 +30,6 @@ namespace Mağaza_Ürün_Takip_Sistemi.Models.Entity
         public virtual DbSet<PERSONELLER> PERSONELLER { get; set; }
         public virtual DbSet<SATISLAR> SATISLAR { get; set; }
         public virtual DbSet<URUNLER> URUNLER { get; set; }
+        public virtual DbSet<ADMIN_GIRIS> ADMIN_GIRIS { get; set; }
     }
 }

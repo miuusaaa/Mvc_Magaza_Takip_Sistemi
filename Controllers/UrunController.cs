@@ -8,15 +8,22 @@ using Mağaza_Ürün_Takip_Sistemi.Models.Entity;
 
 namespace Mağaza_Ürün_Takip_Sistemi.Controllers
 {
+    [Authorize]
     public class UrunController : Controller
     {
         MagazaUrunStokMVCEntities db = new MagazaUrunStokMVCEntities();
-        public ActionResult Index()
+        public ActionResult Index(string p)
         {
-            var urun = db.URUNLER.Where(x=>x.durum == true && x.KATEGORILER.durum == true).ToList();
-            return View(urun);
+            var urun = db.URUNLER.Where(x=>x.durum == true && x.KATEGORILER.durum == true);
+
+            if(!string.IsNullOrEmpty(p))
+            {
+                urun = urun.Where(u=>u.ad.Contains(p) && u.durum == true);
+            }
+            return View(urun.ToList());
         }
 
+       
         [HttpGet]
         public ActionResult YeniUrun()
         {

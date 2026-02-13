@@ -7,14 +7,22 @@ using Mağaza_Ürün_Takip_Sistemi.Models.Entity;
 
 namespace Mağaza_Ürün_Takip_Sistemi.Controllers
 {
+    [Authorize]
     public class KategoriController : Controller
     {
         // GET: Kategori
         MagazaUrunStokMVCEntities db = new MagazaUrunStokMVCEntities();
-        public ActionResult Index()
+
+        
+        public ActionResult Index(string p)
         {
-            var kategoriler = db.KATEGORILER.Where(x => x.durum == true).ToList();
-            return View(kategoriler);
+            var kategoriler = db.KATEGORILER.Where(x => x.durum == true);
+
+            if(!string.IsNullOrEmpty(p))
+            {
+                kategoriler = kategoriler.Where(k => k.ad.Contains(p) && k.durum == true);
+            }
+            return View(kategoriler.ToList());
         }
 
         [HttpGet]

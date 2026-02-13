@@ -5,6 +5,14 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="MagazaUrunStokMVCModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ADMIN_GIRIS">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kullanici" Type="varchar" MaxLength="20" />
+          <Property Name="sifre" Type="varchar" MaxLength="20" />
+        </EntityType>
         <EntityType Name="KATEGORILER">
           <Key>
             <PropertyRef Name="id" />
@@ -43,7 +51,7 @@
           <Property Name="personel" Type="int" />
           <Property Name="musteri" Type="int" />
           <Property Name="fiyat" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="tarih" Type="smalldatetime" />
+          <Property Name="tarih" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="URUNLER">
           <Key>
@@ -107,6 +115,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="MagazaUrunStokMVCModelStoreContainer">
+          <EntitySet Name="ADMIN_GIRIS" EntityType="Self.ADMIN_GIRIS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="KATEGORILER" EntityType="Self.KATEGORILER" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MUSTERILER" EntityType="Self.MUSTERILER" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PERSONELLER" EntityType="Self.PERSONELLER" Schema="dbo" store:Type="Tables" />
@@ -174,7 +183,7 @@
           <Property Name="personel" Type="Int32" />
           <Property Name="musteri" Type="Int32" />
           <Property Name="fiyat" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="tarih" Type="DateTime" Precision="0" />
+          <Property Name="tarih" Type="DateTime" Precision="3" Nullable="false" />
           <NavigationProperty Name="MUSTERILER" Relationship="Self.FK_SATISLAR_MUSTERILER" FromRole="SATISLAR" ToRole="MUSTERILER" />
           <NavigationProperty Name="PERSONELLER" Relationship="Self.FK_SATISLAR_PERSONELLER" FromRole="SATISLAR" ToRole="PERSONELLER" />
           <NavigationProperty Name="URUNLER" Relationship="Self.FK_SATISLAR_URUNLER" FromRole="SATISLAR" ToRole="URUNLER" />
@@ -264,7 +273,16 @@
             <End Role="URUNLER" EntitySet="URUNLER" />
             <End Role="SATISLAR" EntitySet="SATISLAR" />
           </AssociationSet>
+          <EntitySet Name="ADMIN_GIRIS" EntityType="MagazaUrunStokMVCModel.ADMIN_GIRIS" />
         </EntityContainer>
+        <EntityType Name="ADMIN_GIRIS">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kullanici" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="sifre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -326,6 +344,15 @@
                 <ScalarProperty Name="alisfiyat" ColumnName="alisfiyat" />
                 <ScalarProperty Name="satisfiyat" ColumnName="satisfiyat" />
                 <ScalarProperty Name="kategori" ColumnName="kategori" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ADMIN_GIRIS">
+            <EntityTypeMapping TypeName="MagazaUrunStokMVCModel.ADMIN_GIRIS">
+              <MappingFragment StoreEntitySet="ADMIN_GIRIS">
+                <ScalarProperty Name="sifre" ColumnName="sifre" />
+                <ScalarProperty Name="kullanici" ColumnName="kullanici" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

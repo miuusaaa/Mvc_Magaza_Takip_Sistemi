@@ -7,6 +7,7 @@ using Mağaza_Ürün_Takip_Sistemi.Models.Entity;
 
 namespace Mağaza_Ürün_Takip_Sistemi.Controllers
 {
+    [Authorize]
     public class SatisController : Controller
     {
         // GET: Satis
@@ -57,7 +58,7 @@ namespace Mağaza_Ürün_Takip_Sistemi.Controllers
             s.URUNLER = urun;
             s.PERSONELLER = personel;
             s.MUSTERILER = musteri;
-            s.tarih = DateTime.Parse(DateTime.Now.ToShortDateString());
+            s.tarih = DateTime.Now;
             db.SATISLAR.Add(s);
             db.SaveChanges();
             return RedirectToAction("Index");
